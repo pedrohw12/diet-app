@@ -31,6 +31,8 @@ export const config = registerAs<TypeOrmModuleOptions>('typeorm', () => {
     connectionTimeout: 30000,
     maxQueryExecutionTime: 30000,
     entities: [__dirname + '/db/orm/entity/*.entity{.ts,.js}'],
+    retryAttempts: 3,
+    driver: 'postgres',
   };
 });
 

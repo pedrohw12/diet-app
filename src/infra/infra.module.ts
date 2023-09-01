@@ -1,26 +1,16 @@
 import { Global, Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 
 import { TypeOrmConfig } from './typeorm.config';
 import { configs } from './config';
+import { FoodModule } from 'src/food/food.module';
+import { FoodService } from 'src/food/food.service';
 
 @Global()
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      envFilePath: ['.env', '.env.development', '.env.production'],
-    }),
-    TypeOrmModule.forRootAsync({
-      inject: [TypeOrmConfig],
-      useFactory: (config: TypeOrmConfig) => config,
-    }),
-    EventEmitterModule.forRoot({
-      wildcard: true,
-    }),
-  ],
+  imports: [TypeOrmModule.forRoot(), FoodModule],
   providers: [],
   exports: [],
 })

@@ -1,4 +1,5 @@
 import { ConfigType, registerAs } from '@nestjs/config';
+import { DataSource } from 'typeorm';
 
 //TODO: Add schema do load default variable values more ELEGANTLY
 export const config = registerAs('app', () => ({
